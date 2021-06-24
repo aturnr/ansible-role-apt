@@ -1,0 +1,6 @@
+---
+
+- name: Include tests
+  include_tasks:  
+
+...
