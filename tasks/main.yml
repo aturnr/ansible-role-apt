@@ -1,3 +1,24 @@
 ---
-# tasks file for lineguy.example
 
+- name: apt | Update cache
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time  }}"
+  changed_when: false
+  tags:
+    - apt
+
+- name: apt | Install packages
+  apt:
+    pkg: "{{ apt_install_packages }}"
+    state: present
+  tags:
+    - apt
+
+- name: apt | Remove packages
+  apt:
+    pkg: "{{ apt_remove_packages }}"
+    purge: true
+    state: absent
+  tags:
+    - apt
