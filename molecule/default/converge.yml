@@ -5,6 +5,6 @@
     - name: Including vars main.yml
       include_vars: vars/main.yml
 
-    - name: "Include ansible-role-..."
+    - name: "Include ansible-role-apt"
       include_role:
-        name: "ansible-role-..."
+        name: "ansible-role-apt"

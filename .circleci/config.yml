@@ -1,0 +1,60 @@
+
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+
+ # Test
+ test:
+   machine:
+     image: ubuntu-1604:201903-01
+   steps:
+     - checkout
+     - run:
+         name: Install Dependancies
+         command: |  
+           sudo apt update -y -qq
+           sudo apt install -y -qq python-pip
+           # Install dependancies
+           pip install -r requirements.txt
+           # Check ansible version
+           ansible --version
+           # Check molecule version
+           molecule --version
+     - run:
+         name: Molecule Tests
+         command: |
+           # Run tests
+           molecule test
+     - store_test_results:
+         path: test-results
+     - store_artifacts:
+         path: test-results
+
+ # Release
+ release:
+   docker:
+     - image: ubuntu:18.04
+   steps:
+     - checkout
+     - run:
+         name: Run release
+         command: |
+           ./circleci.sh --release
+
+# Orchestrate our job run sequence
+workflows:
+  testing:
+    when:
+    jobs:
+      - test
+  release:
+    when:
+      and:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - equal: [ "", << pipeline.git.tag >> ]
+    jobs:
+      - release:
+          requires:
+            - test
+

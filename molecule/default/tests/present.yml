@@ -1,0 +1,15 @@
+---
+
+ - name: "Register if {{ package }} is present"
+   command: "dpkg --get-selections | grep -Fq '{{ package | string }}'"
+   register: gp
+   check_mode: no
+   ignore_errors: yes
+   changed_when: no
+
+ - name: "Test if {{ package }} is present"
+   fail:
+     msg: "{{ package }} isn't installed"
+   when: not gp.rc == 0
+
+...
