@@ -7,7 +7,7 @@ jobs:
  # Test
  test:
    machine:
-     image: ubuntu-1604:201903-01
+     image: ubuntu:1804
    steps:
      - checkout
      - run:
@@ -28,9 +28,6 @@ jobs:
            molecule test
      - store_test_results:
          path: test-results
-     - store_artifacts:
-         path: test-results
-
  # Release
  release:
    docker:
@@ -41,6 +38,10 @@ jobs:
          name: Run release
          command: |
            ./circleci.sh --release
+     - store_test_results:
+         path: test-results
+     - store_artifacts:
+         path: test-results
 
 # Orchestrate our job run sequence
 workflows:
@@ -56,4 +57,3 @@ workflows:
       - release:
           requires:
             - test
-
