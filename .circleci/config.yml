@@ -44,11 +44,10 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  testing:
-    when:
+  build_and_test:
     jobs:
       - test
-  release:
+  build_and_release:
     when:
       and:
         - equal: [ master, << pipeline.git.branch >> ]
