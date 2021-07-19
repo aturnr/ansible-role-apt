@@ -8,8 +8,8 @@ trap cleanup SIGINT SIGTERM ERR EXIT
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 github_token="${GITHUB_TOKEN}"
-github_repo="${TRAVIS_REPO_SLUG}"
-build_number="${TRAVIS_BUILD_NUMBER}"
+github_repo="${CIRCLE_PR_REPONAME}"
+build_number="${CIRCLE_BUILD_NUM}"
 
 # FUNCTIONS
 

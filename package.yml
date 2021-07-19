@@ -1,9 +1,9 @@
 ---
 
-name: ansible-role-...
+name: ansible-role-apt
 
 description: |
-  A ansible role to...
+  A ansible role for managing packages on debian based systems.
 
 version: 1.0.0
 

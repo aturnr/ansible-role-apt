@@ -1,8 +1,8 @@
 galaxy_info:
   author: lineguy
-  role_name: 
+  role_name: apt 
   description: |
-    A ansible role to... 
+    A ansible role for managing packages on debian based systems. 
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -31,11 +31,13 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - 20.04
+        - all
+    - name: Debian
+      versions:
+        - all
 
   galaxy_tags:
-    - ohmyzsh
-    - zsh
+    - apt
 
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to

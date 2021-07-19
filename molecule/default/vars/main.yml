@@ -1,2 +1,10 @@
 ---
 
+apt_cache_valid_time: 3600
+
+apt_remove_packages:
+  - htop
+  - ipcalc
+apt_install_packages:
+  - vim
+  - git

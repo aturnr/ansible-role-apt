@@ -2,3 +2,15 @@
 - name: Prepare
   hosts: all
   tasks:
+
+    - name: Update cache
+      apt:
+        update_cache: yes
+      changed_when: false
+
+    - name: Install prep packages
+      apt:
+        pkg:
+          - htop
+          - ipcalc
+        state: present
