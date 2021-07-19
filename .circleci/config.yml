@@ -6,8 +6,8 @@ jobs:
 
  # Test
  test:
-   machine:
-     image: ubuntu:18.04
+   docker:
+     - image: docker:17.05.0-ce-git
    steps:
      - checkout
      - run:
@@ -31,7 +31,7 @@ jobs:
  # Release
  release:
    docker:
-     - image: ubuntu:18.04
+     - image: docker:17.05.0-ce-git
    steps:
      - checkout
      - run:
