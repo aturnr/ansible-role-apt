@@ -7,7 +7,7 @@ jobs:
  # Test
  test:
    machine:
-     image: ubuntu:1804
+     image: ubuntu:18.04
    steps:
      - checkout
      - run:
