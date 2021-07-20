@@ -30,7 +30,8 @@ jobs:
          name: Molecule Tests
          command: |
            # Symlink project folder
-           ln -s /home/circleci/project /etc/ansible/roles/${CIRCLE_PROJECT_REPONAME}
+           mkdir -p /home/circleci/.ansible/roles
+           ln -s /home/circleci/project /home/circleci/.ansible/roles/${CIRCLE_PROJECT_REPONAME}
            # Run tests
            molecule test
      - store_test_results:
