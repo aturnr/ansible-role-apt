@@ -1,8 +1,8 @@
 version: 2.1
 # Define the jobs we want to run for this project
 jobs:
- # Test
- test:
+ # Testing
+ Testing:
    machine:
      image: ubuntu-2004:202010-01
    steps:
@@ -34,38 +34,25 @@ jobs:
            ln -s /home/circleci/project /home/circleci/.ansible/roles/${CIRCLE_PROJECT_REPONAME}
            # Run tests
            molecule test
-     - store_test_results:
-         path: test-results
  # Release
- release:
-   docker:
-     - image: ubuntu:18.04
+ Release:
+   machine:
+     image: ubuntu-2004:202010-01
    steps:
      - checkout
-     - run:
-         name: Install Dependancies
-         command: |  
-           apt update -y -qq
-           apt install -y -qq git
      - run:
          name: Run release
          command: |
            ./circleci.sh --release
-     - store_test_results:
-         path: test-results
-     - store_artifacts:
-         path: test-results
 # Orchestrate our job run sequence
 workflows:
-  build_and_test:
+  test_and_release:
     jobs:
-      - test
-  build_and_release:
-    when:
-      and:
-        - equal: [ master, << pipeline.git.branch >> ]
-        - equal: [ "", << pipeline.git.tag >> ]
-    jobs:
-      - release:
+      - Testing
+      - Release:
           requires:
-            - test
+            - Testing
+          filters:
+            branches:
+              only:
+                - master
