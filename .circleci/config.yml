@@ -52,7 +52,7 @@ workflows:
       - Release:
           requires:
             - Testing
-        filters:
-          branches:
-            only:
-              - master
+          filters:
+            branches:
+              only:
+                - master
