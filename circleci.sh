@@ -8,7 +8,7 @@ trap cleanup SIGINT SIGTERM ERR EXIT
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 github_token="${GITHUB_TOKEN}"
-github_repo="${CIRCLE_PR_REPONAME}"
+github_repo="${CIRCLE_PROJECT_REPONAME}"
 build_number="${CIRCLE_BUILD_NUM}"
 
 # FUNCTIONS
@@ -104,7 +104,7 @@ release() {
 
   # Tag release for repository
   msg "  - Tagging release for repository..."
-  git remote add origin-travis "https://${github_token}@github.com/${github_repo}.git"
+  git remote add origin-travis "https://${github_token}@github.com/lineguy/${github_repo}.git"
   git tag "${release_tag}" -a -m "Tag from TravisCI for build ${build_number}!"
   git push -q --tags --set-upstream origin-travis
   msg "  - Tagged with tag: ${release_tag}"
