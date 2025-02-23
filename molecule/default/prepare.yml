@@ -3,14 +3,15 @@
   hosts: all
   tasks:
 
-    - name: Update cache
-      apt:
-        update_cache: yes
+    - name: Prepare | Including vars main.yml
+      ansible.builtin.include_vars: vars/main.yml
+
+    - name: Prepare | Warm apt cache
+      ansible.builtin.apt:
+        update_cache: true
       changed_when: false
 
-    - name: Install prep packages
-      apt:
-        pkg:
-          - htop
-          - ipcalc
+    - name: Prapare | Install prep packages
+      ansible.builtin.apt:
+        pkg: "{{ apt_remove_packages }}"
         state: present

@@ -1,0 +1,13 @@
+---
+
+- name: Tests | Determine if package have been removed
+  ansible.builtin.shell: dpkg --get-selections | grep -Fq '{{ package | string }}'
+  register: reg_remove_packages
+  check_mode: false
+  changed_when: false
+  failed_when: reg_remove_packages.rc == 0
+  loop: "{{ apt_remove_packages }}"
+  loop_control:
+    loop_var: package
+
+...

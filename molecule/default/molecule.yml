@@ -1,62 +1,41 @@
 ---
-
-dependency:
-  name: galaxy
-
 driver:
   name: docker
 
 platforms:
   - name: default_instance
-    image: geerlingguy/docker-ubuntu2004-ansible
+    image: geerlingguy/docker-ubuntu2404-ansible
     pre_build_image: true
 
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../../ # Set so ansible can find the role
 
 verifier:
   name: ansible
 
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
-
 scenario:
   create_sequence:
-#    - dependency
-    - create
-    - prepare
-  check_sequence:
-#    - dependency
-#    - cleanup
-    - destroy
-    - create
-    - prepare
-    - converge
-    - check
-    - destroy
+    - create      # Use the provisioner to start the instances.
+    - prepare     # Use the provisioner to prepare the instances into a particular starting state.
   converge_sequence:
-  #    - dependency
+    - create
+    - prepare
+    - converge    # Use the provisioner to configure instances
+  check_sequence:
     - create
     - prepare
     - converge
+    - check       # Use the provisioner to perform a Dry-Run
+    - destroy     # Use the provisioner to destroy the instances.
   destroy_sequence:
-#    - dependency
-#    - cleanup
     - destroy
   test_sequence:
-#    - dependency
-    - lint
-#    - cleanup
-    - destroy
-    - syntax
+    - syntax      # Use the provisioner to syntax check the role.
     - create
     - prepare
     - converge
-    - idempotence
-#    - side_effect
-    - verify
-#    - cleanup
+    - idempotence # Use the provisioner to configure the instances (Second provision after converge)
+    - verify      # Run automated tests against instances.
     - destroy

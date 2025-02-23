@@ -5,7 +5,12 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Include tests 
-      include_tasks: tests/main.yml
 
+    - name: Verify | Including vars main.yml
+      ansible.builtin.include_vars: vars/main.yml
+
+    - name: Verify | Include tests
+      ansible.builtin.include_tasks: "{{ item }}"
+      with_fileglob:
+        - tests/*.yml
 ...
