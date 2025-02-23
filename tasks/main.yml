@@ -1,22 +1,22 @@
 ---
 
-- name: apt | Update cache
-  apt:
-    update_cache: yes
-    cache_valid_time: "{{ apt_cache_valid_time  }}"
+- name: Apt | Update cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: "{{ apt_cache_valid_time }}"
   changed_when: false
   tags:
     - apt
 
-- name: apt | Install packages
-  apt:
+- name: Apt | Install packages
+  ansible.builtin.apt:
     pkg: "{{ apt_install_packages }}"
     state: present
   tags:
     - apt
 
-- name: apt | Remove packages
-  apt:
+- name: Apt | Remove packages
+  ansible.builtin.apt:
     pkg: "{{ apt_remove_packages }}"
     purge: true
     state: absent

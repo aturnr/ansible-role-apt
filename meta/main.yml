@@ -1,8 +1,9 @@
+---
 galaxy_info:
-  author: lineguy
-  role_name: apt 
+  author: aturnr
+  role_name: apt
   description: |
-    A ansible role for managing packages on debian based systems. 
+    A ansible role for managing packages on debian based systems.
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -17,7 +18,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: MIT
 
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:

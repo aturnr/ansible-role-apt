@@ -1,9 +1,5 @@
-ansible-role-...
+ansible-role-apt
 ================
-
-[![Build Status]()]()
-[![Build Status]()]()
-
 
 A ansible role for managing packages on debian based systems.
 
@@ -11,7 +7,7 @@ Requirements
 ------------
 
 * Ansible >= 2.10
-* Ubuntu 20.04
+* Ubuntu >= 20.04
 
 Role Variables
 --------------
@@ -67,31 +63,31 @@ This is an example playbook of using this role:
 Development & Testing
 ---------------------
 
-Automated testing is performed by [TravisCI](https://www.travis-ci.com/) using [molecule](http://molecule.readthedocs.io/) framework.
-
 To develop and test locally, you will need the following:
 
 * \*nix Based Machine (Ubuntu, MacOS etc...)
-* [Python](https://www.python.org/) (also python-pip)
-* [Ansible](https://www.ansible.com/)
-* [Molecule](http://molecule.readthedocs.io/)
-* [Docker](https://www.docker.com/)
+* [DevBox](https://github.com/jetify-com/devbox)
+* [docker](https://docs.docker.com/engine/install/)
 
-Installing Ansible, Molecule and dependancies:
+# Getting started
+
+Setting up you environment:
 
 ```bash
-pip install -r requirements.txt
+# Start devbox environent
+devbox shell
+
+# List common tasks
+task --list
 ```
-
-Building and testing locally:
-
-```bash
-molecule converge             # Build hosts using docker
-molecule login --host $host   # Logs into host
-```
+Common tasks:
 
 ```bash
-molecule test                 # Runs all tests, linting etc...
+# Lint project
+task lint
+
+# Tests role
+task test
 ```
 
 License
@@ -102,5 +98,4 @@ MIT
 Author Information
 ------------------
 
-This role was created in 2021 by [Aaron Turner](https://github.com/lineguy).
-
+This role was created in 2021 by [Aaron Turner](https://github.com/aturnr).
