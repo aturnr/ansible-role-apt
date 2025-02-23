@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+    "packages": [
+      "python@3.13.1",
+      "go-task@3.41.0"
+    ],
+    "env": {
+      "PROJECT_DIR": "$PWD",
+      "CYAN": "\\033[0;36m",
+      "RED": "\\033[0;31m",
+      "GREEN": "\\033[0;32m",
+      "NOFORMAT": "\\033[0m"
+    },
+    "shell": {
+      "init_hook": [
+        "echo >&2 -e \"${CYAN}🌳 Activating python virtualenv...${NOFORMAT}\"",
+        "source .venv/bin/activate || echo >&2 -e \"${CYAN}❌ Failed to activate virtualenv!${NOFORMAT}\\n\"",
+        "echo >&2 -e \"${GREEN}✓ Activated python virtualenv.${NOFORMAT}\\n\"",
+
+        "echo >&2 -e \"${CYAN}🐍 Installing python dependancies...${NOFORMAT}\"",
+        "pip install --require-virtualenv --ignore-installed --upgrade pip || echo >&2 -e \"${CYAN}❌ Failed to upgrade pip!${NOFORMAT}\\n\"",
+        "pip install --require-virtualenv --ignore-installed -r requirements.txt || echo >&2 -e \"${CYAN}❌ Failed to install project dependancies!${NOFORMAT}\\n\"",
+        "echo >&2 -e \"${GREEN}✓ Installed python virtualenv.${NOFORMAT}\\n\"",
+
+        "echo \"🏁 Ready to go!\""
+      ]
+    }
+  }
