@@ -1,0 +1,23 @@
+---
+
+version: '3'
+
+dotenv: [.env]
+
+tasks:
+
+  lint:
+    desc: Runs linters against project.
+    cmds:
+      - cmd: echo -e "✂️ Running linters...\n"
+        silent: true
+      - cmd: yamllint .
+      - cmd: ansible-lint
+      - cmd: flake8
+
+  test:
+    desc: "Run tests for project."
+    cmds:
+      - cmd: echo -e "🧪 Starting test run...\n"
+        silent: true
+      - cmd: molecule test --all
